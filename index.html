@@ -87,7 +87,8 @@
         .csat-container { display: flex; align-items: flex-end; gap: 14px; }
         .csat-score { font-size: 64px; font-weight: 800; line-height: 1; color: #111827; }
         .csat-meta { padding-bottom: 8px; }
-        .csat-label { font-size: 13px; color: #9DA3AE; margin-bottom: 4px; }
+        .csat-label { font-size: 13px; color: #9DA3AE; margin-bottom: 2px; }
+        .csat-users { font-size: 13px; font-weight: 600; color: #6B7280; margin-bottom: 4px; }
         .csat-trend-up { font-size: 14px; font-weight: 600; color: #16A34A; }
         .csat-trend-down { font-size: 14px; font-weight: 600; color: #DC2626; }
 
@@ -109,7 +110,7 @@
 
         .reason-item {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 14px;
             padding: 13px 16px;
             background: #F9FAFB;
@@ -129,9 +130,22 @@
             font-weight: 700;
             color: #6B7280;
             flex-shrink: 0;
+            margin-top: 1px;
         }
-        .reason-text { font-size: 15px; font-weight: 500; color: #111827; flex: 1; }
-        .reason-links { display: flex; gap: 6px; }
+        .reason-content { flex: 1; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+        .reason-row { display: flex; align-items: center; gap: 10px; }
+        .reason-text { font-size: 15px; font-weight: 500; color: #111827; }
+        .reason-count {
+            font-size: 12px;
+            font-weight: 600;
+            color: #374151;
+            background: #E5E7EB;
+            padding: 2px 8px;
+            border-radius: 999px;
+            flex-shrink: 0;
+        }
+        .reason-prominent { font-size: 12px; color: #6B7280; line-height: 1.4; }
+        .reason-links { display: flex; gap: 6px; margin-top: 1px; flex-shrink: 0; }
         .reason-link {
             font-size: 12px;
             font-weight: 500;
@@ -159,8 +173,18 @@
             color: #DC2626;
             flex-shrink: 0;
         }
+        .issue-header-text { flex: 1; min-width: 0; }
         .issue-title { font-size: 15px; font-weight: 600; color: #111827; }
         .issue-subtitle { font-size: 13px; color: #9DA3AE; font-weight: 400; }
+        .issue-count {
+            font-size: 12px;
+            font-weight: 600;
+            color: #374151;
+            background: #E5E7EB;
+            padding: 2px 8px;
+            border-radius: 999px;
+            flex-shrink: 0;
+        }
 
         .quotes { padding-left: 32px; display: flex; flex-direction: column; gap: 8px; }
         .quote {
@@ -208,12 +232,15 @@ const REPORTS = [
     period: "April 2026",
     timeframe: "13.4 – 30.4",
     csat: "41.5%",
+    csatUsers: "by 8K users",
     csatTrend: null,
     csatTrendUp: true,
 
     topReasons: [
       {
         text: "Solution didn't work",
+        count: "289 users",
+        prominent: "Prominent around Google Workspace, Harmony Editor and Mobile Editor",
         links: [
           { label: "Example 1", url: "https://bo.wix.com/chatbot-builder/conversations/a62e3203-9e04-4898-af51-a46b598bf592" },
           { label: "Example 2", url: "https://bo.wix.com/chatbot-builder/conversations/83b7c39b-07aa-4211-9c73-7c23e6163851" }
@@ -221,6 +248,8 @@ const REPORTS = [
       },
       {
         text: "Didn't understand my question",
+        count: "250 users",
+        prominent: "Prominent around Email Marketing and Premium & Policy",
         links: [
           { label: "Example 1", url: "https://bo.wix.com/chatbot-builder/conversations/3f8b395e-d6bb-4642-86dc-6c8eb8cfb2f7" },
           { label: "Example 2", url: "https://bo.wix.com/chatbot-builder/conversations/bc8de7db-128b-4db9-86c9-b5eb89e1919e" }
@@ -228,6 +257,8 @@ const REPORTS = [
       },
       {
         text: "Too much effort",
+        count: "199 users",
+        prominent: "Prominent around Mobile Editor and Email Marketing",
         links: [
           { label: "Example 1", url: "https://bo.wix.com/chatbot-builder/conversations/df27c0db-09bf-4ad6-9980-4c0205e95498" },
           { label: "Example 2", url: "https://bo.wix.com/chatbot-builder/conversations/0de87aa9-6304-434e-9c93-04ab4bd2e17a" }
@@ -239,6 +270,7 @@ const REPORTS = [
       {
         title: "Repetition",
         subtitle: "stuck on the wrong issue",
+        count: "30 users",
         quotes: [
           { text: "repeating what was not the issue", url: "https://bo.wix.com/chatbot-builder/conversations/48f27b93-a6e0-4050-a1e1-207d2fe76788" },
           { text: "have to repeat everything already answered", url: "https://bo.wix.com/chatbot-builder/conversations/7eb2e63e-d0df-464c-bad4-df89d97ec084" }
@@ -247,6 +279,7 @@ const REPORTS = [
       {
         title: "Bad guidance",
         subtitle: "steps / settings / links / confusing path",
+        count: "29 users",
         quotes: [
           { text: "AI told me to go to settings that dont exist", url: "https://bo.wix.com/chatbot-builder/conversations/df545bb2-e845-40d1-ac79-5167e1abdf16" },
           { text: "repeated questions I had already answered and gave me solutions that I already stated didnt work. Sent me to links that dont exist", url: "https://bo.wix.com/chatbot-builder/conversations/87f55d49-2b2d-42df-bb87-6a2ba63a1854" }
@@ -255,6 +288,7 @@ const REPORTS = [
       {
         title: "Solutions ineffective",
         subtitle: "doesn't work / unhelpful",
+        count: "27 users",
         quotes: [
           { text: "what I need doesnt work and this is really frustrating", url: "https://bo.wix.com/chatbot-builder/conversations/efacf375-e1a7-4a22-8a0a-3bf9b898d841" },
           { text: "AI kept giving me solutions that did not work when I kept telling them I cant sign in because I am not getting verification code", url: "https://bo.wix.com/chatbot-builder/conversations/2169e4e8-a395-4dd3-877c-1982aee11025" }
@@ -263,6 +297,7 @@ const REPORTS = [
       {
         title: "Misunderstanding",
         subtitle: "wrong summary of the problem",
+        count: "8 users",
         quotes: [
           { text: "You created your own description which is incorrect. I CAN access bodyinmotion. I CANNOT ACCESS two new companies we own.", url: "https://bo.wix.com/chatbot-builder/conversations/68de2afe-eac1-4e49-9601-2e390cb2ffb8" },
           { text: "I have spent many hours interacting with your chat system. It does not understand my request.", url: "https://bo.wix.com/chatbot-builder/conversations/6708fb25-c545-4d75-b6a4-fda92d4bd976" }
@@ -271,6 +306,7 @@ const REPORTS = [
       {
         title: "Input limitations",
         subtitle: "too short / cannot attach files",
+        count: "4 users",
         quotes: [
           { text: "The chatbot doesnt allow me to put enough characters to describe the issue. It also doesnt let me attach a pdf or document of any kind.", url: "https://bo.wix.com/chatbot-builder/conversations/a75fb6a0-d339-4d1a-b1bc-a9112c6ec8e4" },
           { text: "You have a limit on characters and when I ask to upload a document I have 3 of the same conversations with a bot who cant help.", url: "https://bo.wix.com/chatbot-builder/conversations/540a4c25-cb06-4783-9ba1-367caa2db2ca" }
@@ -291,7 +327,13 @@ function renderReport(data) {
   const reasonsHtml = data.topReasons.map((r, i) => `
     <div class="reason-item">
       <div class="reason-num">${i + 1}</div>
-      <div class="reason-text">${r.text}</div>
+      <div class="reason-content">
+        <div class="reason-row">
+          <div class="reason-text">${r.text}</div>
+          ${r.count ? `<div class="reason-count">${r.count}</div>` : ''}
+        </div>
+        ${r.prominent ? `<div class="reason-prominent">${r.prominent}</div>` : ''}
+      </div>
       <div class="reason-links">
         ${r.links.map(l => `<a href="${l.url}" target="_blank" class="reason-link">${l.label}</a>`).join('')}
       </div>
@@ -302,10 +344,11 @@ function renderReport(data) {
     <div class="issue-block">
       <div class="issue-header">
         <div class="issue-num">${i + 1}</div>
-        <div>
+        <div class="issue-header-text">
           <span class="issue-title">${issue.title}</span>
           ${issue.subtitle ? `<span class="issue-subtitle"> — ${issue.subtitle}</span>` : ''}
         </div>
+        ${issue.count ? `<div class="issue-count">${issue.count}</div>` : ''}
       </div>
       <div class="quotes">
         ${issue.quotes.map(q => `
@@ -327,6 +370,7 @@ function renderReport(data) {
         <div class="csat-score">${data.csat}</div>
         <div class="csat-meta">
           <div class="csat-label">Helpmate CSAT</div>
+          ${data.csatUsers ? `<div class="csat-users">${data.csatUsers}</div>` : ''}
           ${trendHtml}
         </div>
       </div>
