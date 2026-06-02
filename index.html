@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Helpmate Feedback Report</title>
@@ -91,6 +90,18 @@
         .csat-users { font-size: 13px; font-weight: 600; color: #6B7280; margin-bottom: 4px; }
         .csat-trend-up { font-size: 14px; font-weight: 600; color: #16A34A; }
         .csat-trend-down { font-size: 14px; font-weight: 600; color: #DC2626; }
+        .report-datalink { margin-top: 20px; padding-top: 18px; border-top: 1px solid #F3F4F6; }
+        .report-datalink a {
+            font-size: 13px;
+            font-weight: 600;
+            color: #2563EB;
+            text-decoration: none;
+            background: #EFF6FF;
+            padding: 7px 12px;
+            border-radius: 8px;
+            display: inline-block;
+        }
+        .report-datalink a:hover { background: #DBEAFE; }
 
         .card {
             background: white;
@@ -145,7 +156,7 @@
             flex-shrink: 0;
         }
         .reason-prominent { font-size: 12px; color: #6B7280; line-height: 1.4; }
-        .reason-links { display: flex; gap: 6px; margin-top: 1px; flex-shrink: 0; }
+        .reason-links { display: grid; grid-template-columns: repeat(3, auto); gap: 6px; margin-top: 1px; flex-shrink: 0; justify-content: end; }
         .reason-link {
             font-size: 12px;
             font-weight: 500;
@@ -313,6 +324,131 @@ const REPORTS = [
         ]
       }
     ]
+  },
+
+  // ── PASTE NEXT MONTH HERE, SEPARATED BY A COMMA ──
+  {
+    period: "May 2026",
+    timeframe: "1.5 – 31.5",
+    csat: "40.0%",
+    csatUsers: "by 17K users",
+    csatTrend: "▼ 1.5pp vs April",
+    csatTrendUp: false,
+    dataLink: "https://docs.google.com/spreadsheets/d/1VeELaOg4dnsGxCJ8coqH1hzvI2052Gg3lAEofsfryBg/edit",
+
+    topReasons: [
+      {
+        text: "Solution didn't work",
+        count: "610 users",
+        prominent: "Prominent around Premium & Policy, Domain DNS and Billing — the pain shifted from editors (April) to account & billing topics",
+        links: [
+          { label: "Example 1", url: "https://bo.wix.com/chatbot-builder/conversations/c0854f14-ca0e-485b-98c5-8d4f533f8556" },
+          { label: "Example 2", url: "https://bo.wix.com/chatbot-builder/conversations/26e42859-5d30-4420-b28e-4bbcfe014250" },
+          { label: "Example 3", url: "https://bo.wix.com/chatbot-builder/conversations/2f8c2492-8101-4466-b0e5-d1b3555d22e6" },
+          { label: "Example 4", url: "https://bo.wix.com/chatbot-builder/conversations/83731404-127a-4313-85e6-472455df0a77" },
+          { label: "Example 5", url: "https://bo.wix.com/chatbot-builder/conversations/c65458c3-5f39-4aaf-8f57-29caf05820ac" }
+        ]
+      },
+      {
+        text: "Didn't understand my question",
+        count: "500 users",
+        prominent: "Prominent around Premium & Policy, Billing and Domain DNS",
+        links: [
+          { label: "Example 1", url: "https://bo.wix.com/chatbot-builder/conversations/c81be9f5-b2eb-46a6-99b1-2889bb657974" },
+          { label: "Example 2", url: "https://bo.wix.com/chatbot-builder/conversations/16b95e49-338a-4a1c-a187-10a2268b2cee" },
+          { label: "Example 3", url: "https://bo.wix.com/chatbot-builder/conversations/abcbd37b-ca37-4755-ae2e-604d6c03b193" },
+          { label: "Example 4", url: "https://bo.wix.com/chatbot-builder/conversations/82445b2d-b4ac-415c-a4eb-3ef5eb086bef" },
+          { label: "Example 5", url: "https://bo.wix.com/chatbot-builder/conversations/51aa314b-71a4-4618-8c4c-83a2e97d0243" }
+        ]
+      },
+      {
+        text: "Too much effort",
+        count: "375 users",
+        prominent: "Prominent around Premium & Policy, Billing and Domain DNS",
+        links: [
+          { label: "Example 1", url: "https://bo.wix.com/chatbot-builder/conversations/41113aa5-c7e4-4e36-8237-9c1215551f78" },
+          { label: "Example 2", url: "https://bo.wix.com/chatbot-builder/conversations/b93f4fa4-edfb-4f0c-84df-6b9d54c2eef1" },
+          { label: "Example 3", url: "https://bo.wix.com/chatbot-builder/conversations/37a46374-d1b3-4c44-b73e-5ac8f02710dc" },
+          { label: "Example 4", url: "https://bo.wix.com/chatbot-builder/conversations/6a780734-0812-4941-9704-c835f9813834" },
+          { label: "Example 5", url: "https://bo.wix.com/chatbot-builder/conversations/6838ea95-6ebd-44a0-a0b7-f36b281d2bee" }
+        ]
+      },
+      {
+        text: "Went in circles",
+        count: "189 users",
+        prominent: "New reason option in May — entered straight at #4. Prominent around Premium & Policy and Billing",
+        links: [
+          { label: "Example 1", url: "https://bo.wix.com/chatbot-builder/conversations/0d97bc68-dbd9-477d-9822-b9df26bfeaf5" },
+          { label: "Example 2", url: "https://bo.wix.com/chatbot-builder/conversations/5799d876-c37b-46dc-8c37-a4e8fd115065" },
+          { label: "Example 3", url: "https://bo.wix.com/chatbot-builder/conversations/57e51b47-203b-4d0d-8f12-80b8bd554a80" },
+          { label: "Example 4", url: "https://bo.wix.com/chatbot-builder/conversations/ea4a6232-a06a-48ca-a437-2b7f68dd1969" },
+          { label: "Example 5", url: "https://bo.wix.com/chatbot-builder/conversations/86b11536-2234-4e6a-b8c3-210cba5d7c59" }
+        ]
+      },
+      {
+        text: "Dislike using AI",
+        count: "176 users",
+        prominent: "New reason option in May — users opting out of AI outright; first baseline, to be tracked month over month. Prominent around Premium & Policy and Billing",
+        links: [
+          { label: "Example 1", url: "https://bo.wix.com/chatbot-builder/conversations/52e0d0b9-733b-414f-8428-5e29ddbee04a" },
+          { label: "Example 2", url: "https://bo.wix.com/chatbot-builder/conversations/56da045c-6cd8-42c4-ab23-da5afab31b33" },
+          { label: "Example 3", url: "https://bo.wix.com/chatbot-builder/conversations/c4a5d585-cc21-4fba-8659-d875cc6f5254" },
+          { label: "Example 4", url: "https://bo.wix.com/chatbot-builder/conversations/569a3cfc-efbe-4d17-8395-2debba900bdf" },
+          { label: "Example 5", url: "https://bo.wix.com/chatbot-builder/conversations/8f1418b7-6899-47a7-8084-7bf3a0ab11ce" }
+        ]
+      }
+    ],
+
+    topIssues: [
+      {
+        title: "Solutions ineffective",
+        subtitle: "doesn't work / 'useless'",
+        count: "99 users",
+        quotes: [
+          { text: "Your bot is useless *sigh*", url: "https://bo.wix.com/chatbot-builder/conversations/b359fc98-9969-4a17-9469-569e3372e828" },
+          { text: "no soutions offered. useless", url: "https://bo.wix.com/chatbot-builder/conversations/333691cb-5623-47be-8c20-823119a34a8f" },
+          { text: "you are not helpful at all", url: "https://bo.wix.com/chatbot-builder/conversations/8ef9d97a-d321-489f-ad77-93bac2ba2771" },
+          { text: "useless time wasting machine.", url: "https://bo.wix.com/chatbot-builder/conversations/9d781326-0f10-4300-a8df-a47774d4d16d" },
+          { text: "Not helpful and no response", url: "https://bo.wix.com/chatbot-builder/conversations/8aadd416-0016-4ba8-ba43-084fce65b15d" }
+        ]
+      },
+      {
+        title: "Went in circles",
+        subtitle: "loops & dead ends · now also a formal bad-score reason (189)",
+        count: "37 users",
+        quotes: [
+          { text: "The AI keeps driving me in circles.", url: "https://bo.wix.com/chatbot-builder/conversations/49127afe-1995-4abf-8cf4-4ac44349ba04" },
+          { text: "Kept looping the same answers", url: "https://bo.wix.com/chatbot-builder/conversations/fc1a068a-e9d7-456f-b7dc-87bbb1c84f76" },
+          { text: "Going in circles without results", url: "https://bo.wix.com/chatbot-builder/conversations/ba0646bc-0ecd-444e-aeb8-73e175c7dd37" },
+          { text: "went around in circles", url: "https://bo.wix.com/chatbot-builder/conversations/98f228bb-fa0e-4d32-bbdc-d29fec6c9c21" },
+          { text: "stuck in a loop just linking to the chat bot", url: "https://bo.wix.com/chatbot-builder/conversations/fb1c45ee-be6c-472e-b0a4-3ae19e952eb3" }
+        ]
+      },
+      {
+        title: "Wrong or outdated answers",
+        subtitle: "incorrect or stale info · backed by the new 'Gave wrong answer' reason (24)",
+        count: "32 users",
+        quotes: [
+          { text: "your ai is often wrong", url: "https://bo.wix.com/chatbot-builder/conversations/b311905d-1b4a-4296-afbf-a68ac48b770e" },
+          { text: "it is living in 2024", url: "https://bo.wix.com/chatbot-builder/conversations/b949e124-2dce-44cd-a5a8-494224708330" },
+          { text: "multiple wrong answers", url: "https://bo.wix.com/chatbot-builder/conversations/a6589da6-cc1b-4532-a545-3c04b73b49ab" },
+          { text: "Information was wrong", url: "https://bo.wix.com/chatbot-builder/conversations/2b932e97-abc4-4cfd-9eea-73b2b9bec516" },
+          { text: "AI is fn wrong too often, and wastes time", url: "https://bo.wix.com/chatbot-builder/conversations/59780618-59c2-4cc7-b0ba-9cdb82d2de9e" }
+        ]
+      },
+      {
+        title: "Broken links & bad guidance",
+        subtitle: "links 404 / steps that don't exist · fastest-growing theme (11 → 24 vs April)",
+        count: "24 users",
+        quotes: [
+          { text: "Links dont work all 400 errors", url: "https://bo.wix.com/chatbot-builder/conversations/b07554a5-6766-4566-b06e-dfcb3a453a97" },
+          { text: "Links were all broken from ai", url: "https://bo.wix.com/chatbot-builder/conversations/8d6088f4-fb42-4697-9d4d-4082fac0de2c" },
+          { text: "continually sends broken links", url: "https://bo.wix.com/chatbot-builder/conversations/27e31e74-f18f-4f89-b036-d43d55a479f3" },
+          { text: "continuous link to new ai", url: "https://bo.wix.com/chatbot-builder/conversations/dd5c4845-82ce-4b0c-b7b3-385731cad7aa" },
+          { text: "never got link to submit an investigation", url: "https://bo.wix.com/chatbot-builder/conversations/5b729051-8b62-411e-a257-09fff5ba460c" }
+        ]
+      }
+    ]
   }
 
   // ── PASTE NEXT MONTH HERE, SEPARATED BY A COMMA ──
@@ -374,6 +510,7 @@ function renderReport(data) {
           ${trendHtml}
         </div>
       </div>
+      ${data.dataLink ? `<div class="report-datalink"><a href="${data.dataLink}" target="_blank">📊 Browse example conversations (Google Sheet) ↗</a></div>` : ''}
     </div>
     <div class="card">
       <div class="card-title">Top reasons for bad score</div>
@@ -414,5 +551,6 @@ function init() {
 
 init();
 </script>
-</body>
-</html>
+
+
+</body></html>
