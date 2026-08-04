@@ -103,26 +103,6 @@
         }
         .report-datalink a:hover { background: #DBEAFE; }
 
-        /* Data-quality notice */
-        .notice {
-            background: #FFFBEB;
-            border: 1px solid #FDE68A;
-            border-left: 4px solid #F59E0B;
-            border-radius: 14px;
-            padding: 20px 22px;
-            margin-bottom: 16px;
-        }
-        .notice-title {
-            font-size: 14px;
-            font-weight: 700;
-            color: #92400E;
-            margin-bottom: 10px;
-            line-height: 1.4;
-        }
-        .notice-body { font-size: 13.5px; color: #78350F; line-height: 1.6; }
-        .notice-body p { margin-bottom: 10px; }
-        .notice-body p:last-child { margin-bottom: 0; }
-
         /* TL;DR */
         .tldr {
             margin-top: 24px;
@@ -139,13 +119,6 @@
         }
         .tldr-text { font-size: 14.5px; color: #374151; line-height: 1.6; }
         .tldr-text strong { color: #111827; font-weight: 700; }
-
-        .card-note {
-            font-size: 12.5px;
-            color: #6B7280;
-            line-height: 1.5;
-            margin: -8px 0 16px;
-        }
 
         .card {
             background: white;
@@ -629,20 +602,11 @@ const REPORTS = [
 
     tldr: `<strong>About half the ▼7.1pp isn't real.</strong> A feedback-component bug hid call and post feedback for 20 days (1–20 July), leaving the headline built almost entirely on chat — the lowest-scoring channel. Like-for-like, chat-only CSAT is <strong>27.4% vs 30.1%</strong> in June, and underlying sentiment has been flat at 26–29% every week since it stepped down in mid-June, so July added no new decline. What did change: the loudest complaint is no longer about the bot at all — <strong>419 users</strong> wrote in about a callback that never came, rang once, or dropped mid-call.`,
 
-    notice: {
-      title: "Read this before comparing to June — a feedback-component bug distorted July's headline",
-      html: `
-        <p><strong>From 1 July the feedback component stopped serving the survey to users who chose a call or a post</strong> — only chat users were still asked to rate — and nobody had touched that component's code since the end of May, so this was not a deliberate change; it was raised with the component owners and coverage came back on <strong>21 July</strong>. The contacts themselves never stopped: production shows ~1,300 call and ~270 post conversations per day straight through the blackout, while survey coverage of calls fell from 76% (30 June) to about 1% (2–20 July) and back to 88% (22–31 July). Because call surveys score far higher than chat ones (44% vs 30% in June), losing them dragged the blended number down mechanically — during 1–20 July <strong>99% of all surveys came from chat</strong> against 45% in June, and the moment coverage was restored the headline bounced from 27.6% to 31.5% while chat-only sentiment stayed flat at ~27%. <strong>So roughly half the ▼7.1pp is an artifact:</strong> standardising July to June's channel mix gives <strong>33.0%</strong>, making ~3.5pp of the fall missing surveys and ~3.6pp real, and on a like-for-like chat-only basis July is <strong>27.4% vs 30.1%</strong> in June (▼2.7pp). <strong>The real decline is also not new to July</strong> — chat-only CSAT stepped down in the week of 15 June (37% → 27%) and has been flat at 26–29% every week since, the same mid-June step that took all-channel CSAT from 40.4% (1–15 Jun) to 33.2% (16–30 Jun): larger than the escalation-improvements A/B test alone would predict, attributed to its cumulative effect. July added the optical drop on top; it did not add a new one.</p>
-      `
-    },
-
-    reasonsNote: `Bot-quality basis: escalation feedback is excluded — the <em>Dislike using AI</em> reason, plus any submission whose free text is about reaching a human or a failed callback (873 of 2,556 July submissions, 34%). June is recomputed on the same basis, so the deltas below are like-for-like and will not match June's tab. Escalation feedback is reported separately under Top issues.`,
-
     topReasons: [
       {
         text: "Went in circles",
         count: "682 users",
-        prominent: "Holds #1 for a second month and still growing (609 → 682) — the bot routing users back into the same chat they came from. Heaviest among users entering from Contact Us, the dashboard and Help Center search",
+        prominent: "Holds #1 for a second month and still growing (609 → 682) — the bot sends users to Customer Care, then routes them straight back into the same chat",
         links: [
           { label: "Example 1", url: "https://bo.wix.com/chatbot-builder/conversations/1b44d2cb-24eb-498e-a1f9-4bb35772e50e" },
           { label: "Example 2", url: "https://bo.wix.com/chatbot-builder/conversations/584f3708-d1a9-43be-aea5-a6d67cdb6faa" },
@@ -654,7 +618,7 @@ const REPORTS = [
       {
         text: "Didn't understand my question",
         count: "556 users",
-        prominent: "Up from #3 to #2 (440 → 556, +26%) — the fastest-growing bot-quality reason this month. Concentrated among users entering from the dashboard and Contact Us",
+        prominent: "Up from #3 to #2 (440 → 556, +26%) — the fastest-growing reason this month. Users get an article or a canned reply that doesn't address what they asked",
         links: [
           { label: "Example 1", url: "https://bo.wix.com/chatbot-builder/conversations/1b5352d3-3054-4e46-a798-1a7a355917a9" },
           { label: "Example 2", url: "https://bo.wix.com/chatbot-builder/conversations/a86a0c8d-02c6-40d7-83a7-7cad897a41d8" },
@@ -666,7 +630,7 @@ const REPORTS = [
       {
         text: "Solution didn't work",
         count: "499 users",
-        prominent: "Slips from #2 to #3 (444 → 499). Dashboard and Contact Us entries lead; the recurring pattern is the bot naming a page or setting that isn't in the user's interface",
+        prominent: "Slips from #2 to #3 (444 → 499). The recurring pattern is the bot naming a page or setting that isn't in the user's interface",
         links: [
           { label: "Example 1", url: "https://bo.wix.com/chatbot-builder/conversations/d8d87daa-64b3-4de4-a90b-d6cf1168e684" },
           { label: "Example 2", url: "https://bo.wix.com/chatbot-builder/conversations/7fed31bb-87ef-484e-8a6f-31076dc6d074" },
@@ -678,7 +642,7 @@ const REPORTS = [
       {
         text: "Too much effort",
         count: "319 users",
-        prominent: "Flat at #4 (305 → 319). Contact Us and dashboard entries lead — users object to the number of turns before anything useful happens",
+        prominent: "Flat at #4 (305 → 319) — users object to the number of turns before anything useful happens",
         links: [
           { label: "Example 1", url: "https://bo.wix.com/chatbot-builder/conversations/d074ed18-0e67-47b0-8bbd-8aee506693dc" },
           { label: "Example 2", url: "https://bo.wix.com/chatbot-builder/conversations/9a509894-81bc-41f0-8eeb-551f8d3e0981" },
@@ -701,20 +665,8 @@ const REPORTS = [
 
     topIssues: [
       {
-        title: "The callback never came, or died on pickup",
-        subtitle: "promised call not received · rings once and hangs up · dropped mid-call — July's single largest free-text theme",
-        count: "419 users",
-        quotes: [
-          { text: "I asked twice for someone to call me. Twice I received emails saying you tried to call but couldnt. My phone is working fine. What gives?", url: "https://bo.wix.com/chatbot-builder/conversations/d9e743c5-2fe8-484c-8bf3-26bd71aaf97c" },
-          { text: "The chat is ok but when the call back comes through it rings once and hangs up. I need the call back ASAP", url: "https://bo.wix.com/chatbot-builder/conversations/caed3eb4-f9da-4098-adef-6fe60ea0d11b" },
-          { text: "had another call got hung up on again not sure what's going on with Wix these days. I need a customer service person to call me back.", url: "https://bo.wix.com/chatbot-builder/conversations/5f42e918-7df7-4259-a864-d181e8e67e12" },
-          { text: "Person barely spoke English and then the call got disconnected even though I made sure he had my phone number to call back. Live agent please!", url: "https://bo.wix.com/chatbot-builder/conversations/e4fc7374-7dab-46c9-bcc1-12ced8722257" },
-          { text: "the callback number did not match the number the help call came from. Did not trust it and ended the call", url: "https://bo.wix.com/chatbot-builder/conversations/13404f98-f81b-4a2a-888b-3698f7ec6a56" }
-        ]
-      },
-      {
         title: "Just get me a human",
-        subtitle: "users opting out of AI outright · mirrors the #2 reason 'Dislike using AI' (810)",
+        subtitle: "users opting out of AI outright",
         count: "149 users",
         quotes: [
           { text: "I dont use AI. I dont want to use AI. Quit making me use AI just to talk to a live person. There should be an option right out of the gate.", url: "https://bo.wix.com/chatbot-builder/conversations/1ae02ee5-761a-434f-8a6d-5fa9333c662b" },
@@ -738,19 +690,18 @@ const REPORTS = [
       },
       {
         title: "Went in circles",
-        subtitle: "loops & dead ends · also the #1 bad-score reason (1,009)",
+        subtitle: "loops & dead ends · also the #1 bad-score reason (682)",
         count: "52 users",
         quotes: [
           { text: "Should not have to go down an AI rabbit hole to eventually find request a ticket. Ive wasted a half an hour searching for that one link.", url: "https://bo.wix.com/chatbot-builder/conversations/79f69973-28c2-46c7-a834-5eb3a841aacc" },
           { text: "the chat goes in circles. the links provided link me back here. the problem i have with WIX is random and should not exist.", url: "https://bo.wix.com/chatbot-builder/conversations/2d14b0ce-eeb8-4658-ae90-9065c26028d2" },
           { text: "I kept going to the customer care link as instructed and it kept telling me to use that link over and over again.", url: "https://bo.wix.com/chatbot-builder/conversations/1e2e7902-bfcc-48d4-8dca-36cb77979c8f" },
-          { text: "everything goes in a loop .... not very intuitive. Extremely frustrating. You should have an executive test it out ..", url: "https://bo.wix.com/chatbot-builder/conversations/963c63f3-b464-437b-b362-8f411ef6ceb3" },
-          { text: "you send in endless loop to frustrate. no direct phone contact. recurring charges I never agreed to. wix is not trusted", url: "https://bo.wix.com/chatbot-builder/conversations/f608a168-d27f-40ae-9831-73a525d1c174" }
+          { text: "everything goes in a loop .... not very intuitive. Extremely frustrating. You should have an executive test it out ..", url: "https://bo.wix.com/chatbot-builder/conversations/963c63f3-b464-437b-b362-8f411ef6ceb3" }
         ]
       },
       {
         title: "Wrong or outdated answers",
-        subtitle: "hallucinated steps / stale info / broken links · backed by the 'Gave wrong answer' reason (387)",
+        subtitle: "hallucinated steps / stale info / broken links · backed by the 'Gave wrong answer' reason (200)",
         count: "26 users",
         quotes: [
           { text: "It is hallucinating and suggesting solutions on an interface that does not exist.", url: "https://bo.wix.com/chatbot-builder/conversations/361e3252-5c86-4c7c-9284-afe9b7a6763c" },
@@ -829,14 +780,8 @@ function renderReport(data) {
       </div>` : ''}
       ${data.dataLink ? `<div class="report-datalink"><a href="${data.dataLink}" target="_blank">📊 Browse example conversations (Google Sheet) ↗</a></div>` : ''}
     </div>
-    ${data.notice ? `
-    <div class="notice">
-      <div class="notice-title">⚠️ ${data.notice.title}</div>
-      <div class="notice-body">${data.notice.html}</div>
-    </div>` : ''}
     <div class="card">
       <div class="card-title">Top reasons for bad score</div>
-      ${data.reasonsNote ? `<div class="card-note">${data.reasonsNote}</div>` : ''}
       ${reasonsHtml}
     </div>
     <div class="card">
