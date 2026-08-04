@@ -122,25 +122,30 @@
         .notice-body { font-size: 13.5px; color: #78350F; line-height: 1.6; }
         .notice-body p { margin-bottom: 10px; }
         .notice-body p:last-child { margin-bottom: 0; }
-        .notice-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 12px 0;
+
+        /* TL;DR */
+        .tldr {
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid #F3F4F6;
+        }
+        .tldr-label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #2563EB;
+            margin-bottom: 7px;
+        }
+        .tldr-text { font-size: 14.5px; color: #374151; line-height: 1.6; }
+        .tldr-text strong { color: #111827; font-weight: 700; }
+
+        .card-note {
             font-size: 12.5px;
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
+            color: #6B7280;
+            line-height: 1.5;
+            margin: -8px 0 16px;
         }
-        .notice-table th {
-            text-align: left;
-            padding: 7px 10px;
-            background: #FEF3C7;
-            color: #92400E;
-            font-weight: 600;
-            font-size: 11.5px;
-        }
-        .notice-table td { padding: 7px 10px; border-top: 1px solid #FEF3C7; color: #78350F; }
-        .notice-table th.num, .notice-table td.num { text-align: right; font-variant-numeric: tabular-nums; }
 
         .card {
             background: white;
@@ -622,100 +627,74 @@ const REPORTS = [
     csatTrend: "▼ 7.1pp vs June",
     csatTrendUp: false,
 
+    tldr: `<strong>About half the ▼7.1pp isn't real.</strong> A feedback-component bug hid call and post feedback for 20 days (1–20 July), leaving the headline built almost entirely on chat — the lowest-scoring channel. Like-for-like, chat-only CSAT is <strong>27.4% vs 30.1%</strong> in June, and underlying sentiment has been flat at 26–29% every week since it stepped down in mid-June, so July added no new decline. What did change: the loudest complaint is no longer about the bot at all — <strong>419 users</strong> wrote in about a callback that never came, rang once, or dropped mid-call.`,
+
     notice: {
       title: "Read this before comparing to June — a feedback-component bug distorted July's headline",
       html: `
-        <p><strong>From 1 July the feedback component stopped serving the survey to users who chose a call or a post</strong> — only chat users were still asked to rate. Nobody had touched that component's code since the end of May, so this was not a deliberate change. It was raised with the component owners and <strong>coverage came back on 21 July</strong>.</p>
-        <p>The contacts themselves never stopped. Production shows ~1,300 call and ~270 post conversations <em>per day</em> straight through the blackout — the survey simply reached under 2% of them:</p>
-        <table class="notice-table">
-          <tr><th>Survey coverage of call contacts</th><th class="num">Calls/day</th><th class="num">Surveyed</th><th class="num">Coverage</th></tr>
-          <tr><td>30 June (normal)</td><td class="num">1,413</td><td class="num">1,069</td><td class="num">76%</td></tr>
-          <tr><td>2–20 July (blackout)</td><td class="num">~1,250</td><td class="num">~12</td><td class="num">1%</td></tr>
-          <tr><td>22–31 July (fixed)</td><td class="num">~1,240</td><td class="num">~1,090</td><td class="num">88%</td></tr>
-        </table>
-        <p>Call surveys score far higher than chat surveys (44% vs 30% in June), so losing them dragged the blended number down mechanically. During 1–20 July <strong>99% of all surveys came from chat</strong>, against 45% in June — and the moment coverage was restored the headline bounced back while chat sentiment stayed flat:</p>
-        <table class="notice-table">
-          <tr><th>Period</th><th class="num">Surveys</th><th class="num">CSAT (all)</th><th class="num">CSAT (chat only)</th><th class="num">Chat share</th></tr>
-          <tr><td>June (baseline)</td><td class="num">22,198</td><td class="num">36.6%</td><td class="num">30.1%</td><td class="num">45%</td></tr>
-          <tr><td>1–20 July (bug)</td><td class="num">10,529</td><td class="num">27.6%</td><td class="num">27.5%</td><td class="num">99%</td></tr>
-          <tr><td>21–31 July (fixed)</td><td class="num">10,220</td><td class="num">31.5%</td><td class="num">27.1%</td><td class="num">57%</td></tr>
-        </table>
-        <p><strong>So roughly half the ▼7.1pp is an artifact.</strong> Standardising July to June's channel mix gives <strong>33.0%</strong> — about 3.5pp of the fall is the missing surveys and about 3.6pp is real. On a like-for-like chat-only basis July is <strong>27.4% vs 30.1%</strong> in June (▼2.7pp).</p>
-        <p><strong>And the real decline is not new to July.</strong> Chat-only CSAT stepped down in the week of 15 June (37% → 27%) and has been flat at 26–29% every week since. That mid-June step took all-channel CSAT from 40.4% (1–15 Jun) to 33.2% (16–30 Jun) — the ~7pp already known, larger than the escalation-improvements A/B test alone would predict and attributed to its cumulative effect. July added the optical drop on top; it did not add a new one.</p>
+        <p><strong>From 1 July the feedback component stopped serving the survey to users who chose a call or a post</strong> — only chat users were still asked to rate — and nobody had touched that component's code since the end of May, so this was not a deliberate change; it was raised with the component owners and coverage came back on <strong>21 July</strong>. The contacts themselves never stopped: production shows ~1,300 call and ~270 post conversations per day straight through the blackout, while survey coverage of calls fell from 76% (30 June) to about 1% (2–20 July) and back to 88% (22–31 July). Because call surveys score far higher than chat ones (44% vs 30% in June), losing them dragged the blended number down mechanically — during 1–20 July <strong>99% of all surveys came from chat</strong> against 45% in June, and the moment coverage was restored the headline bounced from 27.6% to 31.5% while chat-only sentiment stayed flat at ~27%. <strong>So roughly half the ▼7.1pp is an artifact:</strong> standardising July to June's channel mix gives <strong>33.0%</strong>, making ~3.5pp of the fall missing surveys and ~3.6pp real, and on a like-for-like chat-only basis July is <strong>27.4% vs 30.1%</strong> in June (▼2.7pp). <strong>The real decline is also not new to July</strong> — chat-only CSAT stepped down in the week of 15 June (37% → 27%) and has been flat at 26–29% every week since, the same mid-June step that took all-channel CSAT from 40.4% (1–15 Jun) to 33.2% (16–30 Jun): larger than the escalation-improvements A/B test alone would predict, attributed to its cumulative effect. July added the optical drop on top; it did not add a new one.</p>
       `
     },
+
+    reasonsNote: `Bot-quality basis: escalation feedback is excluded — the <em>Dislike using AI</em> reason, plus any submission whose free text is about reaching a human or a failed callback (873 of 2,556 July submissions, 34%). June is recomputed on the same basis, so the deltas below are like-for-like and will not match June's tab. Escalation feedback is reported separately under Top issues.`,
 
     topReasons: [
       {
         text: "Went in circles",
-        count: "1,009 users",
-        prominent: "Holds #1 for a second month and still growing (929 → 1,009). Heaviest on the Contact flow, the dashboard and Help Center search",
+        count: "682 users",
+        prominent: "Holds #1 for a second month and still growing (609 → 682) — the bot routing users back into the same chat they came from. Heaviest among users entering from Contact Us, the dashboard and Help Center search",
         links: [
-          { label: "Example 1", url: "https://bo.wix.com/chatbot-builder/conversations/79f69973-28c2-46c7-a834-5eb3a841aacc" },
-          { label: "Example 2", url: "https://bo.wix.com/chatbot-builder/conversations/bec072d3-d13b-4835-a9b6-c5d600a89798" },
-          { label: "Example 3", url: "https://bo.wix.com/chatbot-builder/conversations/800431c8-8852-4f7e-abe5-6841e5f21643" },
-          { label: "Example 4", url: "https://bo.wix.com/chatbot-builder/conversations/b5e40050-36c3-43b5-88a8-3b74e7ac6ba1" },
-          { label: "Example 5", url: "https://bo.wix.com/chatbot-builder/conversations/82b6e9b0-2549-4452-86b4-06cabc18011f" }
-        ]
-      },
-      {
-        text: "Dislike using AI",
-        count: "810 users",
-        prominent: "Stays #2 and keeps climbing (728 → 810) — outright AI rejection is now a structural, not a spike. Prominent on the dashboard and the Contact flow",
-        links: [
-          { label: "Example 1", url: "https://bo.wix.com/chatbot-builder/conversations/1ae02ee5-761a-434f-8a6d-5fa9333c662b" },
-          { label: "Example 2", url: "https://bo.wix.com/chatbot-builder/conversations/8a16be79-22c6-4a17-978c-f04deafa59a9" },
-          { label: "Example 3", url: "https://bo.wix.com/chatbot-builder/conversations/eae49218-9815-47eb-b442-155c7ecca991" },
-          { label: "Example 4", url: "https://bo.wix.com/chatbot-builder/conversations/13404f98-f81b-4a2a-888b-3698f7ec6a56" },
-          { label: "Example 5", url: "https://bo.wix.com/chatbot-builder/conversations/caed3eb4-f9da-4098-adef-6fe60ea0d11b" }
+          { label: "Example 1", url: "https://bo.wix.com/chatbot-builder/conversations/1b44d2cb-24eb-498e-a1f9-4bb35772e50e" },
+          { label: "Example 2", url: "https://bo.wix.com/chatbot-builder/conversations/584f3708-d1a9-43be-aea5-a6d67cdb6faa" },
+          { label: "Example 3", url: "https://bo.wix.com/chatbot-builder/conversations/d28f7ecf-9458-406c-89e9-1a5c1892402f" },
+          { label: "Example 4", url: "https://bo.wix.com/chatbot-builder/conversations/bec072d3-d13b-4835-a9b6-c5d600a89798" },
+          { label: "Example 5", url: "https://bo.wix.com/chatbot-builder/conversations/800431c8-8852-4f7e-abe5-6841e5f21643" }
         ]
       },
       {
         text: "Didn't understand my question",
-        count: "760 users",
-        prominent: "Up from #4 to #3 (640 → 760) — the largest month-over-month rise of any reason. Concentrated on the dashboard and the Contact flow",
+        count: "556 users",
+        prominent: "Up from #3 to #2 (440 → 556, +26%) — the fastest-growing bot-quality reason this month. Concentrated among users entering from the dashboard and Contact Us",
         links: [
-          { label: "Example 1", url: "https://bo.wix.com/chatbot-builder/conversations/aae0d0db-1801-4446-a31a-226b0f2abbd9" },
-          { label: "Example 2", url: "https://bo.wix.com/chatbot-builder/conversations/072a39b8-19cb-41de-9f24-00ac76efd1c9" },
-          { label: "Example 3", url: "https://bo.wix.com/chatbot-builder/conversations/0fcc98e4-985f-4108-b05b-9ca695229659" },
-          { label: "Example 4", url: "https://bo.wix.com/chatbot-builder/conversations/a1b1ebd2-ed70-4730-a686-6a2595046c20" },
-          { label: "Example 5", url: "https://bo.wix.com/chatbot-builder/conversations/2ae016ea-49c3-4433-8347-9f48e4b31be5" }
+          { label: "Example 1", url: "https://bo.wix.com/chatbot-builder/conversations/1b5352d3-3054-4e46-a798-1a7a355917a9" },
+          { label: "Example 2", url: "https://bo.wix.com/chatbot-builder/conversations/a86a0c8d-02c6-40d7-83a7-7cad897a41d8" },
+          { label: "Example 3", url: "https://bo.wix.com/chatbot-builder/conversations/0bcdc8f7-bfd8-48fe-971a-6eec6e09c466" },
+          { label: "Example 4", url: "https://bo.wix.com/chatbot-builder/conversations/76ccddf3-d0e0-4973-828d-2e8f914a9993" },
+          { label: "Example 5", url: "https://bo.wix.com/chatbot-builder/conversations/21a53d0e-0ebe-41af-b3f4-7ce1a7c15464" }
         ]
       },
       {
         text: "Solution didn't work",
-        count: "740 users",
-        prominent: "Slips from #3 to #4 (680 → 740). Split evenly between the Contact flow and the dashboard; a recurring sub-theme is a promised callback that never arrived",
+        count: "499 users",
+        prominent: "Slips from #2 to #3 (444 → 499). Dashboard and Contact Us entries lead; the recurring pattern is the bot naming a page or setting that isn't in the user's interface",
         links: [
-          { label: "Example 1", url: "https://bo.wix.com/chatbot-builder/conversations/d9e743c5-2fe8-484c-8bf3-26bd71aaf97c" },
-          { label: "Example 2", url: "https://bo.wix.com/chatbot-builder/conversations/18a0e4fd-5c8e-4eb2-a29f-c7c10bd9d730" },
-          { label: "Example 3", url: "https://bo.wix.com/chatbot-builder/conversations/d6ae4a25-6ec3-4c17-a5aa-8f6664fb5882" },
-          { label: "Example 4", url: "https://bo.wix.com/chatbot-builder/conversations/3dcebf5a-56e1-434e-9604-c2aef2eff0ed" },
-          { label: "Example 5", url: "https://bo.wix.com/chatbot-builder/conversations/104c4134-cc97-45f4-8678-416cdd5e5f80" }
+          { label: "Example 1", url: "https://bo.wix.com/chatbot-builder/conversations/d8d87daa-64b3-4de4-a90b-d6cf1168e684" },
+          { label: "Example 2", url: "https://bo.wix.com/chatbot-builder/conversations/7fed31bb-87ef-484e-8a6f-31076dc6d074" },
+          { label: "Example 3", url: "https://bo.wix.com/chatbot-builder/conversations/e9f45151-3801-4d57-94ec-a09daa9285e9" },
+          { label: "Example 4", url: "https://bo.wix.com/chatbot-builder/conversations/2e4230f5-8678-4c38-a8de-8da00b661e08" },
+          { label: "Example 5", url: "https://bo.wix.com/chatbot-builder/conversations/0e3a5324-be27-4197-a0b6-efb52f763e01" }
         ]
       },
       {
         text: "Too much effort",
-        count: "546 users",
-        prominent: "Flat at #5 (525 → 546). Contact flow and dashboard lead — users resent the number of turns before a human is reachable",
+        count: "319 users",
+        prominent: "Flat at #4 (305 → 319). Contact Us and dashboard entries lead — users object to the number of turns before anything useful happens",
         links: [
-          { label: "Example 1", url: "https://bo.wix.com/chatbot-builder/conversations/4d74c5a2-c097-4680-a8e7-1eeb3127c479" },
-          { label: "Example 2", url: "https://bo.wix.com/chatbot-builder/conversations/32083c24-cfcf-4fb0-8410-dd9b55982516" },
-          { label: "Example 3", url: "https://bo.wix.com/chatbot-builder/conversations/3fbdf82b-fa53-4660-b49b-824ede50f7be" },
-          { label: "Example 4", url: "https://bo.wix.com/chatbot-builder/conversations/dc539929-892a-4828-bf47-60ab1138ad2b" },
-          { label: "Example 5", url: "https://bo.wix.com/chatbot-builder/conversations/21bc3b72-0f23-4b56-800f-54709f07f953" }
+          { label: "Example 1", url: "https://bo.wix.com/chatbot-builder/conversations/d074ed18-0e67-47b0-8bbd-8aee506693dc" },
+          { label: "Example 2", url: "https://bo.wix.com/chatbot-builder/conversations/9a509894-81bc-41f0-8eeb-551f8d3e0981" },
+          { label: "Example 3", url: "https://bo.wix.com/chatbot-builder/conversations/99dc9c50-f9e2-4a32-8d30-af57aa9ef716" }
         ]
       },
       {
         text: "Gave wrong answer",
-        count: "387 users",
-        prominent: "Holds #6 and levels off (375 → 387) after tripling in June. Complaints centre on steps and screens that don't exist in the user's interface",
+        count: "200 users",
+        prominent: "Flat at #5 (198 → 200) after tripling in June — it has stopped climbing. Complaints centre on steps and screens that don't exist in the user's interface",
         links: [
           { label: "Example 1", url: "https://bo.wix.com/chatbot-builder/conversations/471b6ef6-23e6-4c59-9e7a-2cbb2582a0e3" },
           { label: "Example 2", url: "https://bo.wix.com/chatbot-builder/conversations/a542fde5-92e7-4a13-b39c-1b70bd75d92c" },
-          { label: "Example 3", url: "https://bo.wix.com/chatbot-builder/conversations/6fae703a-91ec-44d1-a685-1bb758cd61f9" },
-          { label: "Example 4", url: "https://bo.wix.com/chatbot-builder/conversations/d54890d8-e4df-4723-a982-2d4de01599eb" },
-          { label: "Example 5", url: "https://bo.wix.com/chatbot-builder/conversations/805721c5-fc2f-4169-81b5-6eaed435f2d7" }
+          { label: "Example 3", url: "https://bo.wix.com/chatbot-builder/conversations/d54890d8-e4df-4723-a982-2d4de01599eb" },
+          { label: "Example 4", url: "https://bo.wix.com/chatbot-builder/conversations/430e0640-c0f6-4f79-83f4-bf9904c2918b" },
+          { label: "Example 5", url: "https://bo.wix.com/chatbot-builder/conversations/9a1303e6-a142-4562-ac0a-8ba45564fec3" }
         ]
       }
     ],
@@ -843,6 +822,11 @@ function renderReport(data) {
           ${trendHtml}
         </div>
       </div>
+      ${data.tldr ? `
+      <div class="tldr">
+        <div class="tldr-label">TL;DR</div>
+        <div class="tldr-text">${data.tldr}</div>
+      </div>` : ''}
       ${data.dataLink ? `<div class="report-datalink"><a href="${data.dataLink}" target="_blank">📊 Browse example conversations (Google Sheet) ↗</a></div>` : ''}
     </div>
     ${data.notice ? `
@@ -852,6 +836,7 @@ function renderReport(data) {
     </div>` : ''}
     <div class="card">
       <div class="card-title">Top reasons for bad score</div>
+      ${data.reasonsNote ? `<div class="card-note">${data.reasonsNote}</div>` : ''}
       ${reasonsHtml}
     </div>
     <div class="card">
